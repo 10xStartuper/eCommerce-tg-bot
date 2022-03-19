@@ -20,7 +20,7 @@ h2 {
 form {
   background: #000;
   padding: 20px;
-  min-width: 420px;
+  width: 420px;
 }
 form input {
   width: 100%;
