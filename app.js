@@ -4,7 +4,8 @@ const { Telegraf } = require('telegraf');
 const bot = new Telegraf(config.BOT_TOKEN);
 const mongoose = require('mongoose');
 const express = require('express');
-const ifAdmin = require('./utils/ifAdmin');
+const isAdmin = require('./utils/isAdmin');
+const isRegistered = require('./utils/isRegistered');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -13,8 +14,11 @@ app.set('view engine', 'ejs');
 
 bot.start(async (ctx) => {
   const user = ctx.from;
-  console.log(user);
-  console.log(ctx.startPayload);
+  (await isRegistered(ctx))
+    ? await ctx.replyWithHTML('<b>🔥 You have already registered</b> ')
+    : await ctx.replyWithHTML('<b>🙅‍♂️ You are not registered</b>');
+
+  (await isAdmin(ctx)) && ctx.replyWithHTML(`<b>🔥 You are admin!</b>`);
 
   await ctx.replyWithHTML(
     `<b>👋 Hello, ${ctx.from.first_name}${
@@ -30,7 +34,6 @@ bot.start(async (ctx) => {
       `Share this link: https://t.me/` +
       `${config.BOT_USERNAME}/start?id=${user.id}`
   );
-  (await ifAdmin(ctx)) && ctx.replyWithHTML(`<b>🔥 You are admin!</b>`);
 });
 
 const main = async () => {
