@@ -1,4 +1,4 @@
-const User = require('../models/user.model.js');
+const { User } = require('../models/');
 const isRegistered = async (ctx) => {
   const user = await User.findOne({ user_id: ctx.from.id });
 

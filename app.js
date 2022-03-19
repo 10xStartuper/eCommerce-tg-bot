@@ -4,7 +4,7 @@ const { Telegraf } = require('telegraf');
 const bot = new Telegraf(config.BOT_TOKEN);
 const mongoose = require('mongoose');
 const express = require('express');
-const { start } = require('./commands/');
+const { start, subscribers } = require('./commands/');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,6 +12,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 bot.start((ctx) => start(ctx));
+bot.command('subscribers', (ctx) => subscribers(ctx));
 
 const main = async () => {
   await mongoose.connect(
