@@ -21,6 +21,7 @@ const main = async () => {
       useUnifiedTopology: true,
     }
   );
+  app.use('/', require('./routes/'));
   await bot.launch().then(() => console.log('Bot has been started'));
   app.listen(config.PORT, () =>
     console.log('Server has been started' + ' on port ' + config.PORT)
