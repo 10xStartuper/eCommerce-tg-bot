@@ -1,6 +1,6 @@
 const { config } = require('../config');
 const User = require('../models/user.model');
-const { isAdmin, isRegistered } = require('../utils/');
+const { isAdmin, isRegistered, addSubscriber } = require('../utils/');
 const start = async (ctx) => {
   (await isAdmin(ctx)) && ctx.replyWithHTML(`<b>🔥 You are admin!</b>`);
   if (await isRegistered(ctx)) {
@@ -23,7 +23,11 @@ const start = async (ctx) => {
         }`
     );
   } else {
-    await ctx.replyWithHTML('<b>🙅‍♂️ You are not registered</b>');
+    await addSubscriber(ctx);
+    await ctx.replyWithHTML(
+      '<b>🙅‍♂️ You are not registered!</b>\n Please register http://localhost:8080/register/' +
+        ctx.from.id
+    );
   }
   console.log(ctx.startPayload ? ctx.startPayload : 'direct');
 };

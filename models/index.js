@@ -1,2 +1,3 @@
 const User = require('./user.model');
-module.exports = { User };
+const Subscriber = require('./subscriber.model');
+module.exports = { User, Subscriber };
