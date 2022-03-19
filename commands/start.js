@@ -1,7 +1,5 @@
-const config = require('../config');
-const isAdmin = require('../utils/isAdmin');
-const isRegistered = require('../utils/isRegistered');
-
+const { config } = require('../config');
+const { isAdmin, isRegistered } = require('../utils/');
 const start = async (ctx) => {
   const user = ctx.from;
   (await isRegistered(ctx))

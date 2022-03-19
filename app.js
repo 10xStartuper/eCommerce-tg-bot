@@ -1,5 +1,5 @@
 require('dotenv').config();
-const config = require('./config');
+const { config } = require('./config');
 const { Telegraf } = require('telegraf');
 const bot = new Telegraf(config.BOT_TOKEN);
 const mongoose = require('mongoose');

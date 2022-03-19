@@ -36,7 +36,7 @@ form input {
 }
 form input:focus,
 form input:active,
-form input[disabled] {
+form input[readonly] {
   border: 1px solid #fff;
   background: #222;
 }

@@ -1,4 +1,4 @@
-const config = require('../config');
+const { config } = require('../config');
 const admin_ids = config.ADMINS;
 console.log(admin_ids);
 const isAdmin = (ctx) => {
